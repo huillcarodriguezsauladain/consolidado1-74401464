@@ -51,3 +51,35 @@ class Automovil:
         if not (1886 <= valor <= 2026):
             raise ValueError("El año de fabricación debe estar entre 1886 y 2026.")
         self._año_fabricacion = valor
+    def tiempo_llegada(self, distancia_km: float) -> float:
+        """Calcula el tiempo estimado de llegada en horas."""
+        return distancia_km / self.velocidad_max
+
+    def __str__(self) -> str:
+        """Retorna la representación legible del automóvil."""
+        return (
+            f"Automóvil: {self.marca} {self.modelo} ({self.año_fabricacion}) | "
+            f"Vel. Máx: {self.velocidad_max} km/h | "
+            f"Combustible: {self.nivel_combustible}%"
+        )
+
+
+if __name__ == "__main__":
+    auto1 = Automovil(
+        marca="Toyota",
+        modelo="Corolla",
+        velocidad_max=180.0,
+        nivel_combustible=75.5,
+        año_fabricacion=2022
+    )
+
+    print(auto1)
+    distancia = 360.0
+    print(f"Tiempo para recorrer {distancia} km: {auto1.tiempo_llegada(distancia):.2f} horas")
+
+    # Demostración de prueba de validación con try/except
+    print("\n--- Probando validación de año incorrecto ---")
+    try:
+        auto1.año_fabricacion = 1800  # Lanza ValueError
+    except ValueError as e:
+        print(f"Error capturado exitosamente: {e}")
