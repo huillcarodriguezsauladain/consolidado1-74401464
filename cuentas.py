@@ -27,3 +27,20 @@ class CuentaBancaria:
     def __str__(self) -> str:
         """Retorna la representación en cadena de la cuenta."""
         return f"Cuenta: {self.numero_cuenta} | Titular: {self.titular} | Saldo: S/. {self._saldo:.2f}"
+
+class CuentaAhorros(CuentaBancaria):
+    """Clase que representa una cuenta de ahorros con tasa de interés."""
+
+    def __init__(self, numero_cuenta: str, titular: str, saldo_inicial: float = 0.0, tasa_interes: float = 0.0) -> None:
+        super().__init__(numero_cuenta, titular, saldo_inicial)
+        self.tasa_interes: float = tasa_interes
+
+    def calcular_interes(self) -> float:
+        """Retorna el interés anual estimado según el saldo actual."""
+        return self._saldo * (self.tasa_interes / 100)
+
+    def __str__(self) -> str:
+        interes_estimado = self.calcular_interes()
+        return (
+            f"{super().__str__()} | Tasa Interés: {self.tasa_interes}% | "
+            f"Interés Anual Estimado: S/. {interes_estimado:.2f}"
