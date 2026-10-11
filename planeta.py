@@ -1,8 +1,8 @@
 import math
 
 
-class planeta:
-    """Clase que representa un planeta de nuestro sistema solar"""
+class Planeta:
+    """Clase que representa un planeta del sistema solar."""
 
     def __init__(
         self,
@@ -11,12 +11,12 @@ class planeta:
         radio: float,
         distancia_al_sol: float,
         tiene_vida: bool = False
-    )->None:
-        self,nombre: str = nombre
-        self,masa: str = masa
-        self,radio: str = radio
-        self,distancia_al_sol: str = distancia_al_sol
-        self,tiene_vida: str = tiene_vida
+    ) -> None:
+        self.nombre: str = nombre
+        self.masa: float = float(masa)
+        self.radio: float = float(radio)
+        self.distancia_al_sol: float = float(distancia_al_sol)
+        self.tiene_vida: bool = bool(tiene_vida)
 
     def calcular_densidad(self) -> float:
         """Calcula y retorna la densidad media del planeta en kg/m³."""
@@ -24,20 +24,19 @@ class planeta:
         return self.masa / volumen
 
     def es_planeta_exterior(self) -> bool:
-        """Determina si es un planeta exterior (distancia mayor a 5.2 UA)."""
+        """Determina si es un planeta exterior (distancia al Sol > 5.2 UA)."""
         return self.distancia_al_sol > 5.2
 
     def __str__(self) -> str:
-        """Retorna una cadena formateada con la información general del planeta."""
-        tipo_planeta: str = "Exterior" if self.es_planeta_exterior() else "Interior"
-        densidad_calculada: float = self.calcular_densidad()
-        presencia_vida: str = "Sí" if self.tiene_vida else "No"
-
+        """Retorna una cadena con el nombre, densidad calculada y si es exterior o interior."""
+        tipo: str = "exterior" if self.es_planeta_exterior() else "interior"
+        densidad: float = self.calcular_densidad()
+        vida: str = "Sí" if self.tiene_vida else "No"
         return (
             f"Planeta: {self.nombre} | "
-            f"Densidad: {densidad_calculada:.2f} kg/m³ | "
-            f"Tipo: {tipo_planeta} | "
-            f"Tiene vida: {presencia_vida}"
+            f"Densidad: {densidad:.2f} kg/m³ | "
+            f"Clasificación: planeta {tipo} | "
+            f"Tiene vida: {vida}"
         )
 
 
